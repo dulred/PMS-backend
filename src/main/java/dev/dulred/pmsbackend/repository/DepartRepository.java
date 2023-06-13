@@ -1,11 +1,13 @@
 package dev.dulred.pmsbackend.repository;
 
 import dev.dulred.pmsbackend.entity.Depart;
+import dev.dulred.pmsbackend.entity.DepartByCon;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface DepartRepository {
-    List<Depart>  selectDepart();
+    List<Depart>  selectDepart(DepartByCon departByCon);
+    int addDepartment(Depart depart);
 }

@@ -8,6 +8,23 @@ public class Depart {
     private String dtype;
     private String dtel;
     private String dmail;
+
+    @Override
+    public String toString() {
+        return "Depart{" +
+                "id=" + id +
+                ", dname='" + dname + '\'' +
+                ", dtype='" + dtype + '\'' +
+                ", dtel='" + dtel + '\'' +
+                ", dmail='" + dmail + '\'' +
+                ", description='" + description + '\'' +
+                ", supdepartment=" + supdepartment +
+                ", establishmentdate=" + establishmentdate +
+                ", establishmentdate1='" + establishmentdate1 + '\'' +
+                ", supdepartment1='" + supdepartment1 + '\'' +
+                '}';
+    }
+
     private String description;
     private Integer supdepartment;
     private Date establishmentdate;
@@ -34,15 +51,19 @@ public class Depart {
     public String getDtel() {
         return dtel;
     }
+
+    public String getDmail() {
+        return dmail;
+    }
+
+    public void setDmail(String dmail) {
+        this.dmail = dmail;
+    }
+
     public void setDtel(String dtel) {
         this.dtel = dtel;
     }
-    public String getDfax() {
-        return dmail;
-    }
-    public void setDfax(String dfax) {
-        this.dmail = dfax;
-    }
+
     public String getDescription() {
         return description;
     }
