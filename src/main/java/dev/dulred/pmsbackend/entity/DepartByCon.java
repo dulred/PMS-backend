@@ -1,18 +1,39 @@
 package dev.dulred.pmsbackend.entity;
 public class DepartByCon {
-    private int currentPage;
-    private int pageSize;
-    private int  startIndex;
+    private String dname;
+    private String dtype;
+
+    public String getDname() {
+        return dname;
+    }
 
     @Override
     public String toString() {
         return "DepartByCon{" +
-                "currentPage=" + currentPage +
+                "dname='" + dname + '\'' +
+                ", dtype='" + dtype + '\'' +
+                ", currentPage=" + currentPage +
                 ", pageSize=" + pageSize +
                 ", startIndex=" + startIndex +
                 ", act='" + act + '\'' +
                 '}';
     }
+
+    public void setDname(String dname) {
+        this.dname = dname;
+    }
+
+    public String getDtype() {
+        return dtype;
+    }
+
+    public void setDtype(String dtype) {
+        this.dtype = dtype;
+    }
+
+    private int currentPage;
+    private int pageSize;
+    private int  startIndex;
 
     private String act;
 

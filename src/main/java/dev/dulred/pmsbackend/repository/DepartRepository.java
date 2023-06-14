@@ -10,4 +10,8 @@ import java.util.List;
 public interface DepartRepository {
     List<Depart>  selectDepart(DepartByCon departByCon);
     int addDepartment(Depart depart);
+    List<Depart>  selectDepartmentsByCon (DepartByCon departByCon);
+    int deleteDepartment (int id);
+    Depart getDepartmentDetail (int id);
+    int updateDepartment (Depart depart);
 }

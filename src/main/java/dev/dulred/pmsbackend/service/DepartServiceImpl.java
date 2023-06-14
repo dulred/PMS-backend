@@ -39,4 +39,40 @@ public class DepartServiceImpl implements DepartService {
         map.put("total",departRepository.selectDepart(null).size());
         return map;
     }
+
+    public Map<String,Object> selectDepartmentsByCon (DepartByCon departByCon){
+        Map<String,Object> map = new HashMap<>();
+        departByCon.setAct("byPage");
+        List<Depart> departs  = departRepository.selectDepartmentsByCon(departByCon);
+        map.put("departs",departs);
+        departByCon.setAct("byNoPage");
+        map.put("total",departRepository.selectDepartmentsByCon(departByCon).size());
+        return  map;
+    }
+
+    @Override
+    public String deleteDepartment(int id) {
+        if (departRepository.deleteDepartment(id)>0){
+            return "ok";
+        }else {
+            return  "no";
+        }
+    }
+    public Map<String,Object> getDepartmentDetail (int id) {
+        Map<String,Object> map = new HashMap<>();
+        List<Depart> departs = departRepository.selectDepart(null);
+        map.put("departs",departs);
+        Depart depart = departRepository.getDepartmentDetail(id);
+        map.put("adepart",depart);
+        return map;
+    }
+
+    public String updateDepartment(Depart depart) {
+        if(departRepository.updateDepartment(depart) > 0)
+            return "ok";
+        return "no";
+    }
+
+
+
 }

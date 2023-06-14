@@ -30,14 +30,25 @@ public class DepartController {
         return departService.getDepartmentByPage(departByCon);
     }
 
+    @PostMapping("/selectDepartmentsByCon")
+    public Map<String,Object> selectDepartmentsByCon (@RequestBody DepartByCon departByCon){
+        return  departService.selectDepartmentsByCon(departByCon);
+    }
 
-    @GetMapping("/test")
-    public Map<String, Integer> test(){
-        Map map = new HashMap();
-        map.put("nishizhu",6666);
-        map.put("cc",3333);
-        map.put("wwww",45645);
-        return map;
+    @PostMapping("/deleteDepartment")
+    public  String deleteDepartment(int id){
+        return departService.deleteDepartment(id);
+    }
+
+    @PostMapping("/getDepartmentDetail")
+    public Map<String,Object> getDepartmentDetail (int id){
+        return departService.getDepartmentDetail(id);
+    }
+
+    @PostMapping("/updateDepartment")
+    public String updateDepartment ( @RequestBody Depart depart){
+        System.out.println(depart.toString());
+        return  departService.updateDepartment(depart);
     }
 
 }

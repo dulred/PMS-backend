@@ -13,5 +13,52 @@
         insert into department (id,dname,dtype,dtel,dmail,description,supdepartment,establishmentdate)
         values (null,#{dname},#{dtype},#{dtel},#{dmail},#{description},#{supdepartment},now())
     </insert>
+    <select id="selectDepartmentsByCon" parameterType="DepartByCon" resultType="Depart">
+        select id,dname,dtype,dtel,dmail,description,supdepartment,establishmentdate as establishmentdate1  from department
+       where 1=1
+        <if test="dname != '' and dname != null " >
+          and dname like concat("%",#{dname},"%")
+        </if>
+        <if test="dtype != '' and dtype != null " >
+          and  dtype = #{dtype}
+        </if>
+        <if test="act == 'byPage'" >
+            limit #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+<!-- 查询一个部门  -->
+<select id="getDepartmentDetail" resultType="Depart" parameterType="Integer">
+    select id,dname,dtype,dtel,dmail,description,supdepartment,establishmentdate as establishmentdate1  from department
+    where id=#{id}
+</select>
+
+    <delete id="deleteDepartment" parameterType="Integer">
+        delete from department where id = #{id}
+    </delete>
+
+    <update id="updateDepartment" parameterType="Depart">
+        update department
+        <set>
+            <if test="dname != null">
+                dname = #{dname},
+            </if>
+            <if test="dtype != null">
+                dtype = #{dtype},
+            </if>
+            <if test="dtel != null">
+                dtel = #{dtel},
+            </if>
+            <if test="dmail != null">
+                dmail = #{dmail},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+            <if test="supdepartment != null">
+                supdepartment = #{supdepartment}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>
-<!--        parameterType="DepartByCon"-->
