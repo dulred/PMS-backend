@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.dulred.pmsbackend.repository.StaffRepository">
+
+    <!-- 录入员工 -->
+    <insert id="addStaff"  parameterType="Staff">
+        insert into staff values (null, #{sname}, #{sex}, #{birthday}, #{sid},
+        #{depart_id}, #{post_id}, #{entrydate}, #{joinworkdate}, #{workform}, #{staffsource},
+        #{politicalstatus}, #{nation}, #{nativeplace}, #{stel}, #{semail}, #{sheight},
+        #{bloodtype}, #{maritalstatus}, #{registeredresidence}, #{education}, #{degree}, #{university},
+        #{major}, #{graduationdate},#{startdate},#{enddate}
+        <if test="startdate != null">
+            ,'正常'
+        </if>
+        <if test="startdate == null">
+            ,#{status}
+        </if>
+        ,#{peroidopdate}
+        )
+    </insert>
+
+    <select id="getStaff" parameterType="staffByCon" resultType="Staff">
+        select * from staff s, department d, post p where s.depart_id = d.id and s.post_id = p.id
+        <if test="act == 'byPage'" >
+            limit #{startIndex}, #{pageSize}
+        </if>
+    </select>
+    <!-- 条件查询员工 -->
+    <select id="selectStaffByCon" resultType="Staff" parameterType="StaffByCon">
+        select * from staff s, department d, post p where s.depart_id = d.id and s.post_id = p.id
+        <if test="sname != null and sname != ''">
+            and s.sname like concat('%',#{sname},'%')
+        </if>
+        <if test="depart_id != 0">
+            and s.depart_id = #{depart_id}
+        </if>
+        <if test="act == 'byPage'" >
+            limit #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="getStaffDetail" parameterType="Integer" resultType="Staff">
+        select * from staff where id=#{id}
+    </select>
+
+    <update id="updateStaff" parameterType="Staff">
+        update Staff
+        <set>
+            sname = #{sname},
+            sex =  #{sex},
+            birthday = #{birthday},
+            sid = #{sid},
+            depart_id =  #{depart_id},
+            post_id = #{post_id},
+            entrydate =  #{entrydate},
+            joinworkdate = #{joinworkdate},
+            workform =  #{workform},
+            staffsource = #{staffsource},
+            politicalstatus =  #{politicalstatus},
+            nation = #{nation},
+            nativeplace =  #{nativeplace},
+            stel = #{stel},
+            semail =  #{semail},
+            sheight = #{sheight},
+            bloodtype =  #{bloodtype},
+            maritalstatus = #{maritalstatus},
+            registeredresidence =  #{registeredresidence},
+            education = #{education},
+            degree =  #{degree},
+            university = #{university},
+            major =  #{major},
+            graduationdate = #{graduationdate},
+            startdate = #{startdate},
+            enddate = #{enddate}
+        </set>
+        where id= #{id}
+    </update>
+
+</mapper>

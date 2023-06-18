@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.dulred.pmsbackend.repository.PostRepository">
+
+    <!-- 添加岗位 -->
+    <insert id="addPost"  parameterType="Post">
+        insert into post (id,pname,ptype,organization) values (null, #{pname}, #{ptype}, #{organization})
+    </insert>
+
+    <select id="getPostByPage" parameterType="PostByCon" resultType="Post">
+        select * from post
+        <if test="act== 'byPage'">
+            limit #{startIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="getPostByCon" parameterType="PostByCon" resultType="Post">
+        select * from post
+        where 1=1
+        <if test="pname != '' and pname != null " >
+            and pname like concat("%",#{pname},"%")
+        </if>
+        <if test="ptype != '' and ptype != null " >
+            and  ptype = #{ptype}
+        </if>
+        <if test="act == 'byPage'" >
+            limit #{startIndex}, #{pageSize}
+        </if>
+    </select>
+    <!-- 查询一个岗位 -->
+    <select id="getPostDetail" resultType="Post" parameterType="Integer">
+        select * from  post where id = #{id}
+    </select>
+    <delete id="deletePost" parameterType="Integer">
+        delete from  post where id = #{id}
+    </delete>
+
+    <update id="updatePost" parameterType="Post" >
+        update post
+        <set>
+            <if test="pname != null">
+                pname = #{pname},
+            </if>
+            <if test="ptype != null">
+                ptype = #{ptype},
+            </if>
+            <if test="organization != null">
+                organization = #{organization}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+</mapper>
