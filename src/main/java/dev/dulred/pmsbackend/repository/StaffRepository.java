@@ -1,5 +1,6 @@
 package dev.dulred.pmsbackend.repository;
 
+import dev.dulred.pmsbackend.entity.PeriodByCon;
 import dev.dulred.pmsbackend.entity.Staff;
 import dev.dulred.pmsbackend.entity.StaffByCon;
 import org.springframework.stereotype.Repository;
@@ -13,4 +14,7 @@ public interface StaffRepository {
     List<Staff> selectStaffByCon (StaffByCon staffByCon);
     Staff getStaffDetail (int id);
     int updateStaff (Staff staff);
+    List<Staff> selectPeriodStaff (StaffByCon staffByCon);
+    List<Staff> selectPeriodStaffCon (PeriodByCon periodByCon);
+    int periodOp (int id ,String status);
 }

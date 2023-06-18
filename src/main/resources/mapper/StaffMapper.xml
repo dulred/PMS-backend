@@ -78,4 +78,46 @@
         where id= #{id}
     </update>
 
+    <!-- 试用期管理查询 -->
+    <select id="selectPeriodStaff" resultType="Staff">
+        select *,s.startdate as startdate1 ,s.enddate as enddate1 from staff s, department d, post p where s.depart_id = d.id and s.post_id = p.id and s.startdate IS NOT NULL  and s.enddate IS NOT NULL
+        <if test="act == 'byPage'" >
+            limit #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <!-- 条件查询试用期管理 -->
+    <select id="selectPeriodStaffCon" resultType="Staff">
+        select *,DATE_FORMAT(s.startdate,'%Y-%m-%d') as startdate1 ,DATE_FORMAT(s.enddate,'%Y-%m-%d') as enddate1  from staff s, department d, post p where s.depart_id = d.id and s.post_id = p.id
+        <if test="sname != null and sname != ''">
+            and s.sname like concat('%',#{sname},'%')
+        </if>
+        <if test="depart_id != 0">
+            and s.depart_id = #{depart_id}
+        </if>
+        <if test="post_id != 0">
+            and s.post_id = #{post_id}
+        </if>
+        <if test="status != null and status != ''">
+            and s.status = #{status}
+        </if>
+        <if test="startdate != null and enddate != null" >
+            and date(s.startdate ) between #{startdate} and #{enddate}
+            and date(s.enddate ) between #{startdate} and #{enddate}
+        </if>
+        <if test="act == 'byPage'" >
+            limit #{startIndex}, #{pageSize}
+        </if>
+    </select>
+
+    <!-- 试用期管理操作 -->
+    <update id="periodOp">
+        update staff
+        <set>
+            status = #{status},
+            peroidopdate = now()
+        </set>
+        where id=#{id}
+    </update>
+
 </mapper>

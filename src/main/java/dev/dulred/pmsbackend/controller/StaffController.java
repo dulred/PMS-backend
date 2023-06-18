@@ -1,5 +1,6 @@
 package dev.dulred.pmsbackend.controller;
 
+import dev.dulred.pmsbackend.entity.PeriodByCon;
 import dev.dulred.pmsbackend.entity.Post;
 import dev.dulred.pmsbackend.entity.Staff;
 import dev.dulred.pmsbackend.entity.StaffByCon;
@@ -42,6 +43,20 @@ public class StaffController {
     @PostMapping("/updateStaff")
     public String updateStaff ( @RequestBody Staff staff){
         return staffService.updateStaff(staff);
+    }
+    @PostMapping("/selectPeriodStaff")
+    public  Map<String, Object> selectPeriodStaff (@RequestBody StaffByCon staffByCon)
+    {
+        return staffService.selectPeriodStaff(staffByCon);
+    }
+    @PostMapping("/selectPeriodStaffCon")
+    public Map<String,Object> selectPeriodStaffCon (@RequestBody PeriodByCon periodByCon)
+    {
+        return staffService.selectPeriodStaffCon(periodByCon);
+    }
+    @GetMapping ("/periodOp")
+    public String periodOp (int id ,String status){
+        return staffService.periodOp(id,status);
     }
 
 }

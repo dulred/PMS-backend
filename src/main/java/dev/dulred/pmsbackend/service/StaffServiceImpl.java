@@ -1,5 +1,6 @@
 package dev.dulred.pmsbackend.service;
 
+import dev.dulred.pmsbackend.entity.PeriodByCon;
 import dev.dulred.pmsbackend.entity.Staff;
 import dev.dulred.pmsbackend.entity.StaffByCon;
 import dev.dulred.pmsbackend.repository.StaffRepository;
@@ -55,6 +56,36 @@ public class StaffServiceImpl implements  StaffService{
             return "no";
         }
 
+    }
+
+    public  Map<String,Object> selectPeriodStaff (StaffByCon staffByCon){
+        Map<String,Object> map = new HashMap<>();
+        staffByCon.setAct("byPage");
+        List<Staff> staffs = staffRepository.selectPeriodStaff(staffByCon);
+        map.put("staffs",staffs);
+        staffByCon.setAct("byNoPage");
+        map.put("total",staffRepository.selectPeriodStaff(staffByCon).size());
+        return  map;
+    }
+
+    @Override
+    public Map<String, Object> selectPeriodStaffCon(PeriodByCon periodByCon) {
+        Map<String,Object> map = new HashMap<>();
+        periodByCon.setAct("byPage");
+        List<Staff> staffs = staffRepository.selectPeriodStaffCon(periodByCon);
+        map.put("staffs",staffs);
+        periodByCon.setAct("byNoPage");
+        map.put("total",staffRepository.selectPeriodStaffCon(periodByCon).size());
+        return map;
+    }
+
+    @Override
+    public String periodOp(int id, String status) {
+        if (staffRepository.periodOp(id,status)>0){
+            return "ok";
+        }else {
+            return "no";
+        }
     }
 
 }
