@@ -1,9 +1,6 @@
 package dev.dulred.pmsbackend.controller;
 
-import dev.dulred.pmsbackend.entity.PeriodByCon;
-import dev.dulred.pmsbackend.entity.Post;
-import dev.dulred.pmsbackend.entity.Staff;
-import dev.dulred.pmsbackend.entity.StaffByCon;
+import dev.dulred.pmsbackend.entity.*;
 import dev.dulred.pmsbackend.service.StaffService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,5 +55,7 @@ public class StaffController {
     public String periodOp (int id ,String status){
         return staffService.periodOp(id,status);
     }
+
+
 
 }
