@@ -120,4 +120,14 @@
         where id=#{id}
     </update>
 
+    <!--查询关联员工-->
+    <select id="selectAssociateStaff" resultType="map" parameterType="Integer">
+        SELECT DISTINCT q.id, t.id from quit q, transfer t where
+            q.staff_id = #{id} or t.staff_id = #{id}
+    </select>
+    <!--删除员工-->
+    <delete id="deleteStaff" parameterType="Integer">
+        delete from staff where id = #{id}
+    </delete>
+
 </mapper>

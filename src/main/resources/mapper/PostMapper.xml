@@ -32,8 +32,14 @@
     <select id="getPostDetail" resultType="Post" parameterType="Integer">
         select * from  post where id = #{id}
     </select>
+    <!--查询关联岗位-->
+    <select id="selectAssociatePost" resultType="map" parameterType="Integer">
+        SELECT DISTINCT s.id, t.id  from staff s, transfer t WHERE
+            s.post_id = #{id} or t.beforepost_id = #{id} or t.afterpost_id = #{id}
+    </select>
+    <!--删除职位-->
     <delete id="deletePost" parameterType="Integer">
-        delete from  post where id = #{id}
+        delete from post where id = #{id}
     </delete>
 
     <update id="updatePost" parameterType="Post" >

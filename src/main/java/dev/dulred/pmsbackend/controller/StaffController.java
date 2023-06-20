@@ -56,6 +56,9 @@ public class StaffController {
         return staffService.periodOp(id,status);
     }
 
-
+    @PostMapping("/deleteStaff")
+    public  String deleteStaff(int id){
+        return staffService.deleteStaff(id);
+    }
 
 }

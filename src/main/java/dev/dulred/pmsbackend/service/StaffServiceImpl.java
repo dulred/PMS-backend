@@ -88,4 +88,15 @@ public class StaffServiceImpl implements  StaffService{
         }
     }
 
+    @Override
+    public String deleteStaff(int id) {
+        //先查询是否有关联数据
+        List<Map<String, Object>>  listMap =staffRepository.selectAssociateStaff(id);
+        if (listMap.size() <= 0) {
+            if (staffRepository.deleteStaff(id) > 0)
+                return "ok";
+        }
+        return "no";
+    }
+
 }

@@ -49,12 +49,13 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public String deletePost(int id) {
-        if (postRepository.deletePost(id)>0){
-            return "ok";
-        }else {
-            return "no";
+        //先查询是否有关联数据
+        List<Map<String, Object>>  listMap =postRepository.selectAssociatePost(id);
+        if (listMap.size() <= 0) {
+            if (postRepository.deletePost(id) > 0)
+                return "ok";
         }
-
+        return "no";
     }
 
     @Override

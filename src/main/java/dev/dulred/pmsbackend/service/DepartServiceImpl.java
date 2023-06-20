@@ -52,11 +52,13 @@ public class DepartServiceImpl implements DepartService {
 
     @Override
     public String deleteDepartment(int id) {
-        if (departRepository.deleteDepartment(id)>0){
-            return "ok";
-        }else {
-            return  "no";
+        //先查询是否有关联数据
+        List<Map<String, Object>>  listMap =departRepository.selectAssociateDepart(id);
+        if (listMap.size() <= 0) {
+            if (departRepository.deleteDepartment(id) > 0)
+                return "ok";
         }
+        return "no";
     }
     public Map<String,Object> getDepartmentDetail (int id) {
         Map<String,Object> map = new HashMap<>();

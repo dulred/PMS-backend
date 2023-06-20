@@ -8,6 +8,27 @@ public class Quit {
     private Integer id;
     private Integer staff_id;
     private String sname;
+
+    @Override
+    public String toString() {
+        return "Quit{" +
+                "id=" + id +
+                ", staff_id=" + staff_id +
+                ", sname='" + sname + '\'' +
+                ", qtype='" + qtype + '\'' +
+                ", act='" + act + '\'' +
+                ", qdate=" + qdate +
+                ", opdate=" + opdate +
+                ", startdate=" + startdate +
+                ", enddate=" + enddate +
+                ", qdate1='" + qdate1 + '\'' +
+                ", opdate1='" + opdate1 + '\'' +
+                ", currentPage=" + currentPage +
+                ", pageSize=" + pageSize +
+                ", startIndex=" + startIndex +
+                '}';
+    }
+
     private String qtype;
     private String act;
     //日期格式化（需要在配置文件配置FormattingConversionServiceFactoryBean）

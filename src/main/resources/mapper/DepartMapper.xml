@@ -33,7 +33,13 @@
     where id=#{id}
 </select>
 
-    <delete id="deleteDepartment" parameterType="Integer">
+    <!--查询关联部门-->
+    <select id="selectAssociateDepart" resultType="map" parameterType="Integer">
+        SELECT DISTINCT d.id, s.id
+        FROM department d, staff s WHERE d.supdepartment = #{id} or s.depart_id  = #{id}
+    </select>
+    <!--删除部门-->
+    <delete id="deleteDepart" parameterType="Integer">
         delete from department where id = #{id}
     </delete>
 

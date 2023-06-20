@@ -24,6 +24,8 @@ public class QuitController {
     }
     @PostMapping("/selectQuitsByCon")
     public Map<String, Object> selectQuitsByCon(@RequestBody Quit quit){
+
+        System.out.println(quit.toString());
         return quitService.selectQuitsByCon(quit);
     }
 }

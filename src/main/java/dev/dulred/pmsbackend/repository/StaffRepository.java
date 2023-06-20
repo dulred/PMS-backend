@@ -6,6 +6,7 @@ import dev.dulred.pmsbackend.entity.StaffByCon;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface StaffRepository {
@@ -17,4 +18,7 @@ public interface StaffRepository {
     List<Staff> selectPeriodStaff (StaffByCon staffByCon);
     List<Staff> selectPeriodStaffCon (PeriodByCon periodByCon);
     int periodOp (int id ,String status);
+    List<Map<String, Object>>  selectAssociateStaff(int id);
+
+    int deleteStaff(int id);
 }

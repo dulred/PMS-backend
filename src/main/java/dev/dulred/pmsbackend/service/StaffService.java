@@ -16,4 +16,5 @@ public interface StaffService {
     Map<String,Object> selectPeriodStaff (StaffByCon staffByCon);
     Map<String,Object> selectPeriodStaffCon (PeriodByCon periodByCon);
     String periodOp (int id,String status);
+    String deleteStaff (int id);
 }
